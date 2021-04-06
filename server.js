@@ -37,13 +37,18 @@ app.get('/',checkAuthenticated,(req,res)=>{
     res.sendFile(path.join(__dirname, 'src', 'index.html'));
 })
 
+app.get('/adhar',checkAuthenticated,(req,res)=>{
+    // res.sendFile('index.html',{root : __dirname});
+    res.sendFile(path.join(__dirname, 'src', 'adhar.html'));
+})
+
 app.get('/login',checkNotAuthenticated,(req,res)=>{
     res.render('login.ejs')
     
 })
 
 app.post('/login',checkNotAuthenticated,passport.authenticate('local',{
-    successRedirect : '/',
+    successRedirect : '/adhar',
     failureRedirect: '/login',
     failureFlash:true
 }))
@@ -84,4 +89,4 @@ function checkNotAuthenticated(req,res,next){
     }
     next()
 }
-app.listen(8080)
+app.listen(8000)
