@@ -12,7 +12,7 @@ deployedContract.deploy({
   data: bytecode,
   arguments: [listOfCandidates.map(name => web3.utils.asciiToHex(name))]
 }).send({
-  from: '0x94934d7d666418AD965d3c39816D3af72b39D40D',
+  from: '0x87c943a748Adcb40BfF6c308d5Be68eB1aC98c7c',
   gas: 1500000,
   gasPrice: web3.utils.toWei('0.00003', 'ether')
 }).then((newContractInstance) => {

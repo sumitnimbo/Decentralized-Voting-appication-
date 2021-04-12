@@ -10,6 +10,8 @@ const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const path = require('path')
+const cookieParser = require('cookie-parser');
+
 const initializePassport = require('./passport-config')
 initializePassport(
     passport,
@@ -29,12 +31,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 app.use("/src", express.static('./src/'));
+app.use(cookieParser());
 // app.use( express.static( "public" ) );
 const users =[];
 
-app.get('/',checkAuthenticated,(req,res)=>{
+app.get('/',(req,res)=>{
     // res.sendFile('index.html',{root : __dirname});
     res.sendFile(path.join(__dirname, 'src', 'index.html'));
+})
+
+app.get('/result',(req,res)=>{
+    // res.sendFile('index.html',{root : __dirname});
+    res.sendFile(path.join(__dirname, 'src', 'result.html'));
 })
 
 app.get('/adhar',checkAuthenticated,(req,res)=>{

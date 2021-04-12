@@ -37,6 +37,7 @@ $('#errorbox').hide()
   	"7382537xxxxx": "915801xxxx",
   	"300000000000": "7276xxxxxx",
     "111122223333" : "8275776062",
+    "222233334444" : "9110956539",
 	"<replace your aadhaar no here>": "<your phone number>",
   }
 

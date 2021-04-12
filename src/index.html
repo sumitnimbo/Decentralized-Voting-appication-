@@ -58,7 +58,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
   <!-- Compiled and minified JavaScript -->
- 
+  <link href="src/index.css" rel="stylesheet">
+  
+  
 </head>
  
 <style>
@@ -68,7 +70,7 @@
         flex-direction: column;
       }
       man{
-          height: 200px;
+          height: 150px;
 
         }
   main {
@@ -83,10 +85,10 @@
 
 <man>
 <nav style="height: 120px" >
-           <div class="nav-wrapper orange accent-3">
+           <div class="nav-wrapper green accent-3 header">
             <img src="./src/images/e-voting-logo.png" alt="" height="120" width="350" style="padding-left: 250px"; >
            
-              <div class="brand-logo center"><h3 style="color: black">Live Election</h3></div>
+              <div class="brand-logo "><h3 style="color: black">Decentralized Voting App</h3></div>
 
            </div>
         </nav>
@@ -95,20 +97,19 @@
 <main>
 <bodyt >
 
-	
+  
   <div class="container">
    <!-- <div id="card-alert" class="card light-blue lighten-5">
                       <div class="card-content light-blue-text">
                         <p id="loc_info">NEWS : You have done 5 actions.</p>
                       </div>
                     </div> -->
-        <table>
+        <!-- <table>
             <h1>
             
                 <thead>
                 <tr>
-                    <!-- <th>Election Symbol</th> -->
-                    <!-- <th>Party</th> -->
+
                     <th>Candidate Name</th>
                     <th>Vote</th>
                 </tr>
@@ -117,35 +118,90 @@
                 <tbody>
                 <tr>
                     
-                    <td>Rama</td>
+                    <td>Aryan</td>
                     <td id="candidate-1"></td>
                     
                 </tr>
                 <tr>
-                    <td>Nick</td>
+                    <td>Ishdutt</td>
                     <td id="candidate-2"></td>
                 
                 </tr>
                 <tr>
-                    <td>Jose</td>
+                    <td>Sumit</td>
                     <td id="candidate-3"></td>
                     
                 </tr>
                 
             </h1>
-        </table>
-        <div id="Voting"> 
-            <input type="text" id="candidate" class="form-control"/>
-            <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+        </table> -->
+        <div class="logOut">
+          <form action="/logout?_method=DELETE" method="POST">
+            <button type = "submit">Log Out</button>
+          </form>  
         </div>
-        <div id="alreadyVoted" class="card light-blue lighten-5">
-            <div class="card-content light-blue-text">
-              <p id="loc_info">You have Voted Successfully.Thankyou for your vote.</p>
+         
+        <table class="rwd-table">
+          <tr>
+            <th>Party Symbol</th>
+            <th>Party Name</th>
+            <th>Candidate Name</th>
+          </tr>
+          <tr>
+            <!-- <td data-th="Movie Title">Star Wars</td>
+            <td data-th="Genre">Adventure, Sci-fi</td>
+            <td data-th="Year">1977</td>
+            <td data-th="Gross">$460,935,665</td> -->
+            <td><img src="./src/images/bjp.png" alt=" "height="50" width="50"></td>
+            <td>BJP</td>
+            <td>Aryan</td>
+
+          </tr>
+          <tr>
+            <!-- <td data-th="Movie Title">Howard The Duck</td>
+            <td data-th="Genre">"Comedy"</td>
+            <td data-th="Year">1986</td>
+            <td data-th="Gross">$16,295,774</td> -->
+            <td><img src="./src/images/cong.jpg" alt=" "height="50" width="50"></td>
+            <td>Congress</td>
+            <td>Ishdutt</td>
+          </tr>
+          <tr>
+            <!-- <td data-th="Movie Title">American Graffiti</td>
+            <td data-th="Genre">Comedy, Drama</td>
+            <td data-th="Year">1973</td>
+            <td data-th="Gross">$115,000,000</td> -->
+            <td><img src="./src/images/shiv.png" alt=" "height="50" width="50"></td>
+            <td>Shiv Sena</td>
+            <td>Sumit</td>
+          </tr>
+        </table>
+        
+        <div class="form-group" id="Voting"> 
+            <!-- <input type="text" id="candidate" class="form-control"/> -->
+            <label for="candidate">Vote For Your Candidate</label>
+            <br>
+            <br>
+            <select class="browser-default " name="candidate" id="candidate">
+              <option selected disabled>Select Candidate</option>
+              <option value="Aryan">Aryan</option>
+              <option value="Ishdutt">Ishdutt</option>
+              <option value="Sumit">Sumit</option>
+            </select>
+            <br>
+            <a href="#" onclick="voteForCandidate()" class="btn btn-primary voteButton">Vote</a>
+        </div>
+        <div id="alreadyVoted" class="card light-blue lighten-5 ">
+            <div class="card-content light-blue-text message">
+              <p id="loc_info">You have Voted Successfully.Thank you for your vote !!!</p>
             </div>
         </div>
-        <form action="/logout?_method=DELETE" method="POST">
-            <button type = "submit">Log Out</button>
-        </form> 
+        <br>
+        
+        <a class="btn btn-primary block full-width m-b login resultButton" href="/result">Results</a>
+        <br>
+        <br>
+        <br>
     </div>
   </main>
         </tbody>
