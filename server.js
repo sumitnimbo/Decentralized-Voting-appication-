@@ -35,12 +35,12 @@ app.use(cookieParser());
 // app.use( express.static( "public" ) );
 const users =[];
 
-app.get('/',(req,res)=>{
+app.get('/',checkAuthenticated,(req,res)=>{
     // res.sendFile('index.html',{root : __dirname});
     res.sendFile(path.join(__dirname, 'src', 'index.html'));
 })
 
-app.get('/result',(req,res)=>{
+app.get('/result',checkAuthenticated,(req,res)=>{
     // res.sendFile('index.html',{root : __dirname});
     res.sendFile(path.join(__dirname, 'src', 'result.html'));
 })
@@ -85,6 +85,7 @@ app.delete('/logout',(req,res)=>{
     res.redirect('/login')
 })
 
+
 function checkAuthenticated(req,res,next){
     if(req.isAuthenticated()){
         return next()
@@ -97,4 +98,4 @@ function checkNotAuthenticated(req,res,next){
     }
     next()
 }
-app.listen(8000)
+app.listen(3000)

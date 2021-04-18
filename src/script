@@ -4,7 +4,7 @@ web3.eth.getAccounts(console.log)
 bytecode = fs.readFileSync('Voting_sol_Voting.bin').toString()
 abi = JSON.parse(fs.readFileSync('Voting_sol_Voting.abi').toString())
 deployedContract = new web3.eth.Contract(abi)
-listOfCandidates = ['Rama', 'Nick', 'Jose']
+listOfCandidates = ['Aryan', 'Ishdutt', 'Sumit']
 
 
 
@@ -12,7 +12,7 @@ deployedContract.deploy({
   data: bytecode,
   arguments: [listOfCandidates.map(name => web3.utils.asciiToHex(name))]
 }).send({
-  from: '0x87c943a748Adcb40BfF6c308d5Be68eB1aC98c7c',
+  from: '0x158E27643E97e4C05264180af4D2BD231c9dbB06',
   gas: 1500000,
   gasPrice: web3.utils.toWei('0.00003', 'ether')
 }).then((newContractInstance) => {
@@ -23,3 +23,5 @@ deployedContract.deploy({
 node_modules/.bin/ganache-cli
 
 npm run devStart
+
+node_modules/.bin/solcjs --bin --abi Voting.sol

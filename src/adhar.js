@@ -38,6 +38,7 @@ $('#errorbox').hide()
   	"300000000000": "7276xxxxxx",
     "111122223333" : "8275776062",
     "222233334444" : "9110956539",
+    "333344445555" : "9566855523",
 	"<replace your aadhaar no here>": "<your phone number>",
   }
 
@@ -94,7 +95,9 @@ $(verifyotp).click(function(){
         var d = new Date();
     	d.setTime(d.getTime() + (1*24*60*60*1000));      
     	var expires = "expires="+ d.toUTCString();
-    	document.cookie = 'show' + "=" + user.uid + ";" + expires + ";path=/";
+    	// document.cookie = 'show' + "=" + user.uid + ";" + expires + ";path=/";
+        document.cookie = 'verifiedUser' + "=" + 'true' + ";" + expires + ";path=/";
+
     	window.location = '/'
 
       }).catch(function (error) {
@@ -103,6 +106,11 @@ $(verifyotp).click(function(){
         window.alert('Error while checking the verification code:\n\n'
            + error.code + '\n\n' + error.message);
         window.verifyingCode = false;
+        var d = new Date();
+        d.setTime(d.getTime() + (1*24*60*60*1000));      
+        var expires = "expires="+ d.toUTCString();
+        // document.cookie = 'show' + "=" + user.uid + ";" + expires + ";path=/";
+          document.cookie = 'verifiedUser' + "=" + 'false' + ";" + expires + ";path=/";
         $('#errorbox').show()
 		$('#error').text('Enter valid OTP')
       });

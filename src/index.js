@@ -1,13 +1,17 @@
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
 var account;
+var hasVoted = false ;
+var verifiedUser = readCookie('verifiedUser');
+
+var adharNumber = readCookie('aadhaar');
 web3.eth.getAccounts().then((f) => {
  account = f[0];
 })
 
-abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-
+// abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
+abi = JSON.parse('[{"inputs":[{"internalType":"bytes32[]","name":"candidateNames","type":"bytes32[]"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"}],"name":"addAdhar","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"candidateList","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"}],"name":"votedornot","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]')
 contract = new web3.eth.Contract(abi);
-contract.options.address = "0x1dBa89Ef45F59F1c8DC761A2AcD737a2Dc9aB711";
+contract.options.address = "0x02cdFA242f22891fD9fFdB6ECeD3e3C18044F699";
 // update this contract address with your contract address
 
 candidates = {"Aryan": "candidate-1", "Ishdutt": "candidate-2", "Sumit": "candidate-3"}
@@ -23,49 +27,85 @@ function readCookie(name) {
     return null;
 }
 
-var aadhaar = readCookie('aadhaar');
+// var aadhaar = readCookie('aadhaar');
 
-var voted = readCookie('voted');
+// var voted = readCookie('voted');
 
-console.log(voted);
-if(voted==="Yes"+aadhaar)
-{
-    $("#Voting").hide();
-    $("#alreadyVoted").show();
-}
+// console.log(voted);
+// if(voted==="Yes"+aadhaar)
+// {
+//     $("#Voting").hide();
+//     $("#alreadyVoted").show();
+// }
 
 
-console.log(aadhaar);
+console.log(adharNumber);
 
-function voteForCandidate(candidate) {
+async function voteForCandidate(candidate) {
  candidateName = $("#candidate").val();
  console.log(candidateName);
 
- contract.methods.voteForCandidate(web3.utils.asciiToHex(candidateName)).send({from: account}).then((f) => {
-  let div_id = candidates[candidateName];
-  contract.methods.totalVotesFor(web3.utils.asciiToHex(candidateName)).call().then((f) => {
-   $("#" + div_id).html(f);
-  })
+ await contract.methods.voteForCandidate(web3.utils.asciiToHex(candidateName)).send({from: account}).then((f) => {
+//   let div_id = candidates[candidateName];
+//   contract.methods.totalVotesFor(web3.utils.asciiToHex(candidateName)).call().then((f) => {
+//    $("#" + div_id).html(f);
+//   })
+console.log(f);
  })
+console.log(contract.methods.voteForCandidate)
+await contract.methods.addAdhar(adharNumber).send({from: account}).then((f) => {
+    console.log(f);
+   })
+
+
  $("#Voting").hide();
  $("#alreadyVoted").show();
+ $("#resultSection").show();
+ $("#resultInfo").hide();
+
  //ADDING THE COOKIE THAT THE PERSON ALREADY VOTED
  var d = new Date();
- d.setTime(d.getTime() + (12460601000));
- var expires = "expires="+ d.toUTCString();
- document.cookie = 'voted' + "=" + "Yes"+ aadhaar + ";" + expires + ";path=/";
+//  d.setTime(d.getTime() + (12460601000));
+//  var expires = "expires="+ d.toUTCString();
+//  document.cookie = 'voted' + "=" + "Yes"+ aadhaar + ";" + expires + ";path=/";
 }
 
 $(document).ready(function() {
- candidateNames = Object.keys(candidates);
 
- for(var i=0; i<candidateNames.length; i++) {
- let name = candidateNames[i];
-  
- contract.methods.totalVotesFor(web3.utils.asciiToHex(name)).call().then((f) => {
-  $("#" + candidates[name]).html(f);
+contract.methods.votedornot(adharNumber).call().then((f) => {
+  hasVoted = f ;
+  console.log(hasVoted)
+  if(hasVoted){
+    $("#alreadyVoted").show();
+    $("#resultSection").show();
+    $("#resultInfo").hide();
+    $("#Voting").hide();
+    console.log(verifiedUser)
+    console.log(hasVoted)
+
+} else {
+    $("#alreadyVoted").hide();
+    $("#resultSection").hide();
+    $("#resultInfo").show();
+    $("#Voting").show();
+
+
+}
+
  })
- }
- $("#alreadyVoted").hide();
+
+//  console.log(hasVoted)
+//  if(hasVoted){
+//     $("#alreadyVoted").show();
+//     $("#resultSection").show();
+//     $("#resultInfo").hide();
+
+
+// } else {
+//     $("#alreadyVoted").hide();
+//     $("#resultSection").hide();
+//     $("#resultInfo").show();
+
+// }
 
 });

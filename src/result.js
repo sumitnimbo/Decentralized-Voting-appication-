@@ -31,7 +31,7 @@ web3.eth.getAccounts().then((f) => {
 abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
 
 contract = new web3.eth.Contract(abi);
-contract.options.address = "0x1dBa89Ef45F59F1c8DC761A2AcD737a2Dc9aB711";
+contract.options.address = "0x02cdFA242f22891fD9fFdB6ECeD3e3C18044F699";
 // update this contract address with your contract address
 
 candidates = {"Aryan": "candidate-1", "Ishdutt": "candidate-2", "Sumit": "candidate-3"}

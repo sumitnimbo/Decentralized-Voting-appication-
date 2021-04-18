@@ -9,6 +9,8 @@ contract Voting {
   
   mapping (bytes32 => uint256) public votesReceived;
   
+  mapping (uint => bool) voted;
+
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -44,4 +46,14 @@ contract Voting {
     }
     return false;
   }
+
+  function votedornot(uint _id) public view returns(bool){
+        return voted[_id] ;
+  }
+  
+  function addAdhar(uint _id) public {
+      voted[_id] = true ;
+  }
+
+
 }

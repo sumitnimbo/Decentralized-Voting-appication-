@@ -9,6 +9,8 @@
  
   <!-- Compiled and minified JavaScript -->
   <link href="src/index.css" rel="stylesheet">
+  <link href="src/result.css" rel="stylesheet">
+
 </head>
  
 <style>
@@ -36,7 +38,7 @@
            <div class="nav-wrapper orange accent-3 header">
             <img src="./src/images/e-voting-logo.png" alt="" height="120" width="350" style="padding-left: 250px"; >
            
-              <div class="brand-logo center"><h3 style="color: black">Decentralized Voting App</h3></div>
+              <div class="brand-logo "><h3 style="color: black">Decentralized Voting App</h3></div>
 
            </div>
         </nav>
@@ -68,6 +70,13 @@
         }
         </script> -->
 <body >
+  <div class="logOut">
+    <form action="/logout?_method=DELETE" method="POST">
+      <button type = "submit">Log Out</button>
+    </form>  
+  </div>
+  <br>
+  <br>
 <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
