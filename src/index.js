@@ -61,6 +61,8 @@ await contract.methods.addAdhar(adharNumber).send({from: account}).then((f) => {
  $("#Voting").hide();
  $("#alreadyVoted").show();
  $("#resultSection").show();
+ $("#notVerified").hide();
+
  $("#resultInfo").hide();
 
  //ADDING THE COOKIE THAT THE PERSON ALREADY VOTED
@@ -75,19 +77,38 @@ $(document).ready(function() {
 contract.methods.votedornot(adharNumber).call().then((f) => {
   hasVoted = f ;
   console.log(hasVoted)
+  console.log("verified user :" + verifiedUser)
   if(hasVoted){
     $("#alreadyVoted").show();
     $("#resultSection").show();
     $("#resultInfo").hide();
+    $("#notVerified").hide();
+
     $("#Voting").hide();
-    console.log(verifiedUser)
-    console.log(hasVoted)
+    console.log("verified user if wala:" + verifiedUser)
+    // console.log(hasVoted)
 
 } else {
-    $("#alreadyVoted").hide();
-    $("#resultSection").hide();
-    $("#resultInfo").show();
-    $("#Voting").show();
+    if(verifiedUser){
+        $("#alreadyVoted").hide();
+        $("#notVerified").show();
+
+        $("#resultSection").show();
+        $("#resultInfo").hide();
+        $("#Voting").hide();
+        console.log("else if wala")
+    } else {
+        $("#alreadyVoted").hide();
+        $("#resultSection").hide();
+        $("#notVerified").hide();
+
+        $("#resultInfo").show();
+        $("#Voting").show();
+        // console.log("else wala " + verifiedUser)
+        // console.log(hasVoted)
+        console.log("else else wala")
+
+    }
 
 
 }
