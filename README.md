@@ -3,12 +3,12 @@
 ## Design Consideration
 
 The following considerations should be made when introducing an e-voting system:
-Only registered voters should be authenticated by the e-voting system, which should verify their identity.
-Invalid candidates should not be allowed access to the e-voting scheme.
-Every voter should have only one vote, and the system should prevent double voting.
-Voters should have full anonymity, and their votes should not be traceable.
-It should not encourage someone to tamper with the votes cast.
-The system should not allow counting to be controlled by a single authority.
+1. Only registered voters should be authenticated by the e-voting system, which should verify their identity.
+2. Invalid candidates should not be allowed access to the e-voting scheme.
+3. Every voter should have only one vote, and the system should prevent double voting.
+4. Voters should have full anonymity, and their votes should not be traceable.
+5. It should not encourage someone to tamper with the votes cast.
+6. The system should not allow counting to be controlled by a single authority.
 
 ### Hardware: 
 Laptop: RAM: 16GB 
