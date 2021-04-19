@@ -29,3 +29,8 @@ Solidity
 Passport.js
 ExpressJs
 Ganache CLI
+
+### Members: 
+1. Sumit Nimborkar
+2. Ishdutt Trivedi
+3. Aryan Singh Rathaur
