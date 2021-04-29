@@ -34,3 +34,6 @@ Ganache CLI
 1. Sumit Nimborkar
 2. Ishdutt Trivedi
 3. Aryan Singh Rathaur
+
+### Detailed Report:
+The report can be found here: https://docs.google.com/document/d/1lMzKTenSTfMzBtc4kMUjoDGyfS6LpwBzrVFrhubl1i4/edit?usp=sharing
